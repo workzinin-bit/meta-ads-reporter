@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 import pytz
 
 TG_TOKEN   = os.environ.get("TG_TOKEN", "8636205250:AAER0fGj1rBtP1DPZGgM3QbGlhdOSk2Uj8o")
-TG_CHAT_ID = "691399498"
+TG_CHAT_ID = os.environ.get("TG_CHAT_ID", "691399498")
 META_TOKEN = os.environ.get("META_TOKEN", "EAALFMGdfPjkBQzRwZAjW7kwvyWfZBp4E7DzTzrxGHNmXy13h0rgiBMWoimZAowMZAz25VuH7gSYWoyhCerkhZBvGQY5UJc3dZALPpM5F8GkIp21snuaEU9cIutxMhL0snhcXfI5wG1sKDmTs5btiJgpkrQqWSbB4tbinrShSdeZALPapF9EvKHQ05b45hYnFZAeN")
 KYIV_TZ    = pytz.timezone("Europe/Kyiv")
 
