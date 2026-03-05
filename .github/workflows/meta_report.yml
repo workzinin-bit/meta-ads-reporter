@@ -1,0 +1,29 @@
+name: Meta Ads Daily Report
+on:
+  schedule:
+    - cron: '0 6 * * *'
+    - cron: '30 6 * * 1'
+  workflow_dispatch:
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pytz matplotlib
+      - name: Daily report
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 6 * * *'
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          META_TOKEN: ${{ secrets.META_TOKEN }}
+        run: python meta_report_github.py daily
+      - name: Weekly report
+        if: github.event.schedule == '30 6 * * 1'
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          META_TOKEN: ${{ secrets.META_TOKEN }}
+        run: python meta_report_github.py weekly
